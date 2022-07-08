@@ -68,7 +68,7 @@ public class PruebaHora {
 		System.out.println("============================================================");
 		System.out.println("=            Comprobando método aSegundos                  =");
 		System.out.println("============================================================");
-		System.out.println("Las 20:18:59 deben devolver 73.062 segundos para ser correcto: "+hora2.aSegundos());
+		System.out.println("Las 20:18:59 deben devolver 73.139 segundos para ser correcto: "+hora2.aSegundos());
 		*/
 		
 		/*
