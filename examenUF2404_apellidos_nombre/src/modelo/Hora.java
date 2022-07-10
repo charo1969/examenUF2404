@@ -3,43 +3,39 @@ package modelo;
 public class Hora {
 
 	/**
-	 * Atributos de clase privados
+	 * ATRIBUTOS
 	 */
-
+	private int modo; // EN 24 HORAS.
 	private int horas;
 	private int minutos;
 	private int segundos;
 
-	/**
-	 * MÈtodos de clase
-	 * 
-	 */
-
-	// constructor sin par·metros
+	// CONSTRUCTOR SIN PAR√ÅMETROS
 	public Hora() {
-		super();
+		this.modo = 24; // SON 24 HORAS
 		this.horas = 00;
 		this.minutos = 00;
 		this.segundos = 00;
 	}
 
-	// constructor con par·metros
-	public Hora(int horas, int minutos, int segundos) {
-		super();
-		if (horas < 24 && minutos < 60 && segundos < 60) {
-			this.horas = horas;
-			this.minutos = minutos;
-			this.segundos = segundos;
-		} else {
-			horas = 00;
-			minutos = 00;
-			segundos = 00;
+	/**
+	 * CONSTRUCTOR CON PARAMETROS . AQUI PONGO QUE EL DIA TIENE 24 HORAS, QUE LOS
+	 * MINUTOS SON 60 EN UNA HORA , QUE LOS SEGUNDOS SON 60 EN UN MINUTO.
+	 * 
+	 * @param h
+	 * @param m
+	 * @param s
+	 */
+	public Hora(int h, int m, int s) {
 
-		}
+		this.modo = 24;
+		this.horas = h % 24;
+		this.minutos = m % 60;
+		this.segundos = s % 60;
 
 	}
 
-	// constructor de copia
+	// CONSTRUCTOR CON COPIA
 
 	public Hora(Hora h) {
 		this.horas = h.horas;
@@ -48,20 +44,8 @@ public class Hora {
 	}
 
 	/**
-	 * MÈtodo estatico y privado valida
-	 * 
+	 * GETTERS Y SETTERS
 	 */
-
-	private static boolean valida(int phora, int pminutos, int psegundos) {
-
-		boolean vHora = false;
-
-		if (phora < 24 && pminutos < 60 && psegundos < 60) {
-			vHora = true;
-		}
-		return vHora;
-
-	}
 
 	// getters y setters
 	public int getHoras() {
@@ -84,35 +68,48 @@ public class Hora {
 		this.segundos = segundos;
 	}
 
-	// metodo setHora
-
-	public void setHoras(int horas,int minutos,int segundos) {
-		if()
+	public int getModo() {
+		return modo;
 	}
 
-	// metodo toString
+	public void setModo(int modo) {
+		this.modo = modo;
+	}
+
+	// METODO TOSTRING CON STRING.FORMAT
 	@Override
 	public String toString() {
 
 		return String.format("La Hora es %.2f:%.2f:%2f", horas, minutos, segundos);
 
-		// return "Hora [horas=" + horas + ", minutos=" + minutos + ", segundos=" +
-		// segundos + "]";
 	}
-	// metodo aSegundos
-
-	public int aSegundos() {
-		return this.segundos;
-	}
-
-	public int deSegundos() {
-		
-		if()
-		
-	}
-
-	public int segundosEntre() {
-
-	}
+	
+	/**
+	 * METODO VALIDA
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
