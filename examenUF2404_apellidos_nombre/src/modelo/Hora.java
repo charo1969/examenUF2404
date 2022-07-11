@@ -5,18 +5,30 @@ public class Hora {
 	/**
 	 * ATRIBUTOS
 	 */
-	private int modo; // EN 24 HORAS.
+	
 	private int horas;
 	private int minutos;
 	private int segundos;
 
 	// CONSTRUCTOR SIN PARÁMETROS
 	public Hora() {
-		this.modo = 24; // SON 24 HORAS
-		this.horas = 00;
-		this.minutos = 00;
-		this.segundos = 00;
+		
+		this.horas = 0;
+		this.minutos = 0;
+		this.segundos = 0;
 	}
+	
+	/**
+	 * METODO VALIDA STATIC , PUBLIC Y BOOLEAN
+	 */
+	
+	public static boolean valida(int horas, int minutos, int segundos) {
+		if (horas >=0 && horas <24 && minutos >= 0 && minutos <60 && segundos>=0 && segundos < 60 ) {
+			return true;
+		}
+		return false;
+	}
+	
 
 	/**
 	 * CONSTRUCTOR CON PARAMETROS . AQUI PONGO QUE EL DIA TIENE 24 HORAS, QUE LOS
@@ -28,19 +40,13 @@ public class Hora {
 	 */
 	public Hora(int h, int m, int s) {
 
-		this.modo = 24;
-		this.horas = h % 24;
-		this.minutos = m % 60;
-		this.segundos = s % 60;
-
+		setHora(horas, minutos, segundos); //colocamos el metodo setHora.
 	}
 
 	// CONSTRUCTOR CON COPIA
 
 	public Hora(Hora h) {
-		this.horas = h.horas;
-		this.minutos = h.minutos;
-		this.segundos = h.segundos;
+		setHora(h.horas, h.minutos, h.segundos);//colocamos el método setHora.
 	}
 
 	/**
@@ -56,38 +62,58 @@ public class Hora {
 		return minutos;
 	}
 
-	public void setMinutos(int minutos) {
-		this.minutos = minutos;
-	}
-
+	
 	public int getSegundos() {
 		return segundos;
 	}
-
-	public void setSegundos(int segundos) {
-		this.segundos = segundos;
+	
+	/**
+	 * CREAMOS UN SETHORA 
+	 */
+	public void setHora(int horas, int minutos, int segundos) {
+		if(valida(horas, minutos, segundos)) {
+			this.horas = horas;
+			this.minutos = minutos;
+			this.segundos = segundos;
+		}else {
+			this.horas = 0;
+			this.minutos = 0;
+			this.segundos = 0;
+		}
 	}
-
-	public int getModo() {
-		return modo;
-	}
-
-	public void setModo(int modo) {
-		this.modo = modo;
-	}
+	
 
 	// METODO TOSTRING CON STRING.FORMAT
 	@Override
 	public String toString() {
 
-		return String.format("La Hora es %.2f:%.2f:%2f", horas, minutos, segundos);
+		return String.format("La Hora es %.2d:%.2d:%2d", this.horas, this.minutos, this.segundos);
 
 	}
-	
 	/**
-	 * METODO VALIDA
+	 * DE HORAS A SEGUNDOS MULTIPLICANDO POR 60 Y SUMANDOLAS A SEGUNDOS.
+	 * @return
 	 */
+	public int aSegundos() {
+		return this.horas*60+this.minutos*60+this.segundos;
+	}
+	/**
+	 * DE SEGUNDOS A HORAS DIVIDIENDO Y QUEDANDONOS CON EL RESTO CADA VEZ
+	 * @param segundos
+	 */
+	public void deSegundos(int segundos) {
+		int resto = segundos % (86400);//Es el total de segundos en 24 horas.(3600*24)
+		int seg = resto%60;
+		resto = resto/60;
+		
+		int min = resto%60;
+		int h = resto/60;
+		this.setHora(h, min, segundos);
+	}
 	
+	public int segundosEntre(Hora h) {
+		return Math.abs(this.aSegundos()-h.aSegundos());
+	}
 	
 	
 	
